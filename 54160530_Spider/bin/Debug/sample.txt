@@ -1,0 +1,61 @@
+<ul class="list fl">
+            <li id="lineu11_0">
+<a href="../info/1095/45890.htm">长春吉大附中实验学校(高中)公开招聘教师的启事</a><span>2019-06-24</span></li>
+        <hr id="duannumu11_0" style="display:none;height:0px;border:none;">
+            <li id="lineu11_1">
+<a href="../info/1095/45881.htm">关于吉林大学招标与采购管理中心公开招聘人才派遣人员（B类）的通知</a><span>2019-06-21</span></li>
+        <hr id="duannumu11_1" style="display:none;height:0px;border:none;">
+            <li id="lineu11_2">
+<a href="../info/1095/45842.htm">关于开展2019年招聘管理人员调剂工作的通知</a><span>2019-06-13</span></li>
+        <hr id="duannumu11_2" style="display:none;height:0px;border:none;">
+            <li id="lineu11_3">
+<a href="../info/1095/45831.htm">关于转发中共中央办公厅 国务院办公厅印发《关于进一步弘扬科学家精神加强作风和学...</a><span>2019-06-12</span></li>
+        <hr id="duannumu11_3" style="display:none;height:0px;border:none;">
+            <li id="lineu11_4">
+<a href="../info/1095/45827.htm">2019年吉林大学公开招聘专业技术人员和管理人员拟聘人选公示</a><span>2019-06-12</span></li>
+        <hr id="duannumu11_4" style="height:0px;border:none;">
+            <li id="lineu11_5">
+<a href="../info/1095/45820.htm">实验室与设备管理处公开招聘人才派遣人员（B类）的通知</a><span>2019-06-11</span></li>
+        <hr id="duannumu11_5" style="display:none;height:0px;border:none;">
+            <li id="lineu11_6">
+<a href="../info/1095/45810.htm">吉林大学关于公开招聘高端实验技术人才的启事</a><span>2019-06-10</span></li>
+        <hr id="duannumu11_6" style="display:none;height:0px;border:none;">
+            <li id="lineu11_7">
+<a href="../info/1095/45805.htm">吉林大学化学学院2019年公开招聘专业教师启事</a><span>2019-06-10</span></li>
+        <hr id="duannumu11_7" style="display:none;height:0px;border:none;">
+            <li id="lineu11_8">
+<a href="../info/1095/45793.htm">吉林大学人力资源和社会保障处关于公开招聘人才派遣人员（B类）的通知</a><span>2019-06-05</span></li>
+        <hr id="duannumu11_8" style="display:none;height:0px;border:none;">
+            <li id="lineu11_9">
+<a href="../info/1095/45764.htm">吉林大学植物科学学院2019年专业教师招聘启事</a><span>2019-06-03</span></li>
+        <hr id="duannumu11_9" style="height:0px;border:none;">
+            <li id="lineu11_10">
+<a href="../info/1095/45709.htm">2019年吉林大学招生办公室公开招聘管理人员拟聘人选公示</a><span>2019-05-27</span></li>
+        <hr id="duannumu11_10" style="display:none;height:0px;border:none;">
+            <li id="lineu11_11">
+<a href="../info/1095/45694.htm">关于公布2019年吉林大学公开招聘管理人员进入用人单位考核环节人选及后续相关事宜...</a><span>2019-05-24</span></li>
+        <hr id="duannumu11_11" style="display:none;height:0px;border:none;">
+            <li id="lineu11_12">
+<a href="../info/1095/45672.htm">吉林大学北区综合办公室人才派遣人员（B类）拟聘人选公示</a><span>2019-05-23</span></li>
+        <hr id="duannumu11_12" style="display:none;height:0px;border:none;">
+            <li id="lineu11_13">
+<a href="../info/1095/45631.htm">吉林大学西区综合办公室人才派遣人员（B类）拟聘人选公示</a><span>2019-05-21</span></li>
+        <hr id="duannumu11_13" style="display:none;height:0px;border:none;">
+            <li id="lineu11_14">
+<a href="../info/1095/45620.htm">关于公布2019年吉林大学公开招聘专业技术人员和管理人员综合能力测试成绩及后续相...</a><span>2019-05-20</span></li>
+        <hr id="duannumu11_14" style="height:0px;border:none;">
+            <li id="lineu11_15">
+<a href="../info/1095/45581.htm">关于吉林大学2019年国际学生专职辅导员应聘人员参加复试考核工作的通知</a><span>2019-05-16</span></li>
+        <hr id="duannumu11_15" style="display:none;height:0px;border:none;">
+            <li id="lineu11_16">
+<a href="../info/1095/45557.htm">吉林大学招生办公室人才派遣人员（B类）拟聘人选公示</a><span>2019-05-14</span></li>
+        <hr id="duannumu11_16" style="display:none;height:0px;border:none;">
+            <li id="lineu11_17">
+<a href="../info/1095/45515.htm">关于公布2019年吉林大学公开招聘专业技术人员拟进入综合能力考核环节人选及后续相...</a><span>2019-05-10</span></li>
+        <hr id="duannumu11_17" style="display:none;height:0px;border:none;">
+            <li id="lineu11_18">
+<a href="../info/1095/45514.htm">关于公布2019年吉林大学公开招聘管理人员拟进入综合能力考核环节人选及后续相关事...</a><span>2019-05-10</span></li>
+        <hr id="duannumu11_18" style="display:none;height:0px;border:none;">
+            <li id="lineu11_19">
+<a href="../info/1095/45499.htm">关于吉林大学2019年国际学生专职辅导员应聘人员参加初试考核工作的通知</a><span>2019-05-10</span></li>
+       
