@@ -10,6 +10,8 @@ using System.Web;
 using System.Web.Mvc;
 using JiebaNet.Segmenter;
 using JiebaNet.Analyser;
+using System.Threading;
+using System.Diagnostics;
 
 namespace _54160530_Spider
 {
@@ -20,11 +22,16 @@ namespace _54160530_Spider
         static int total_department = 0;
         //static Dictionary<string, string> department_date = new Dictionary<string, string>();
         static ArrayList department_date = new ArrayList();
+        static string html_content = "";//用于html页面
+
         public static void Main(string[]ar)
         {
             string website_prefix = "https://www.jlu.edu.cn/index/tzgg";
             CrawlerController c = new CrawlerController();
             c.Index(website_prefix+".htm");
+            //单线程
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             for (int i=39;i>0;i--)
             {
                 string website = website_prefix + "/"+i.ToString()+".htm";
@@ -32,17 +39,36 @@ namespace _54160530_Spider
                 c.Index(website);
                 
             }
+            sw.Stop();
+            long totalTime = sw.ElapsedMilliseconds;
+            Console.WriteLine("The total running time is: " + totalTime/1000+"s");
+            
+            //多线程
+            /*
+            for (int i = 0; i < 30; i++)
+            {
+                string website = website_prefix + "/" + i.ToString() + ".htm";
+                ParameterizedThreadStart tStart = new ParameterizedThreadStart(c.Index);
+                Thread thread = new Thread(tStart);
+                thread.Start(website);//传递参数
+            }
+            */
+            
             Console.WriteLine("The total amount of news: " + total_amount_news);
-            Console.WriteLine("The total amount of department detected: " + total_department);
+            //Console.WriteLine("The total amount of department detected: " + total_department);
+            
             foreach(KeyValuePair<string,string> dep_date in department_date )
             {
                 Console.WriteLine(dep_date.Key + dep_date.Value);
             }
             c.saveAsCSV();
             c.jieba_analysis();
+            c.saveHTML();
+            
         }
         // GET: Crawler
         public void Index(string website)
+        //public void Index(string website)
         {
             //抓取整本小说
             CrawlerController cra = new CrawlerController();// 顶点抓取小说网站小说
@@ -80,6 +106,7 @@ namespace _54160530_Spider
             {
 
                 //Console.WriteLine(sMC[i].Groups[0].Value);
+                //截取网页中的相对路径，与域名进行拼接从而得到一个完整的路径
                 int startInd = sMC[i].Groups[0].Value.IndexOf("/info/");
                 int len = sMC[i].Groups[0].Value.Length-startInd-2;
                 String subURL = sMC[i].Groups[0].Value.Substring(startInd, len);
@@ -90,15 +117,28 @@ namespace _54160530_Spider
          
             }
             //依次对所有URL执行操作
+            /*
             foreach(String i in URLS)
             {
+
                 //Console.WriteLine(i);
                 processURL(i);
             }
+            */
+
+            //多线程操作
+            
+            foreach(string i in URLS)
+            {
+                ParameterizedThreadStart tStart = new ParameterizedThreadStart(processURL);
+                Thread thread = new Thread(tStart);
+                thread.Start(i);//传递参数
+            }
+           
 
 
             //保存网页内容
-            
+
             //FileStream fs = new FileStream(@"\samole\sample.txt", FileMode.Create, FileAccess.Write);
             //StreamWriter sr = new StreamWriter(fs);
             //sr.WriteLine(html);// 开始写入值
@@ -145,7 +185,7 @@ namespace _54160530_Spider
         /// <param name="content">内容</param>
         /// <param name="name">名字</param>
         /// <param name="path">路径</param>
-        public void Novel(string content, string name, string path,string depstr,string datestr)
+        public void SaveFile(string content, string name, string path,string depstr,string datestr)
         {
             string Log = content + "\r\n";
             //将文本存入totalcontent中，方便之后jieba分析
@@ -235,9 +275,9 @@ namespace _54160530_Spider
 
             return retString;
         }
-        public void processURL(String url)
+        public void processURL(object url)
         {
-            String html=HttpGet(url, "");
+            String html=HttpGet((string)url, "");
             //匹配标题
             Regex tag_title = new Regex(@"<title>[\s\S]*</title>");
             var mat_mulu = tag_title.Match(html);
@@ -258,6 +298,10 @@ namespace _54160530_Spider
             string textstr = mat_text.Groups[0].ToString();
             textstr = textstr.Replace("&nbsp;", "");
             //Console.WriteLine(textstr);
+
+            //存入html_content
+            html_content += "<p>" + title + "</p>" + "\r\n" + datestr + "\r\n" + textstr + "\r\n";
+
 
 
             //将</p>标签转换为\n进行换行
@@ -342,7 +386,7 @@ namespace _54160530_Spider
             string path = Directory.GetCurrentDirectory();
             path += @"\log\"+datestr+@"\";
             //Console.WriteLine(path);
-            Novel(content, title, path,department,datestr);
+            SaveFile(content, title, path,department,datestr);
         }
         //将每个部门每次发表新闻的时间以CSV的形式存储下
         public void saveAsCSV()
@@ -362,8 +406,8 @@ namespace _54160530_Spider
         }
         public void jieba_analysis()
         {
+            /*
             Dictionary<string, int> frequency = new Dictionary<string, int>();
-            //var s = "在数学和计算机科学之中，算法（algorithm）为任何良定义的具体计算步骤的一个序列，常用于计算、数据处理和自动推理。精确而言，算法是一个表示为有限长列表的有效方法。算法应包含清晰定义的指令用于计算函数。";
             var seg = new JiebaSegmenter();
             var freqs = seg.Cut(total_content);
             foreach(string str in freqs)
@@ -381,11 +425,37 @@ namespace _54160530_Spider
                 //Console.WriteLine(str + " ");
             }
             DictonarySort(frequency);
-            
+            */
+
+            //TF-IDF
+            Console.WriteLine("TF-IDF");
+            JiebaNet.Analyser.TfidfExtractor tfidf = new TfidfExtractor();
+            IEnumerable enu=tfidf.ExtractTagsWithWeight(total_content);
+            foreach(WordWeightPair wordWeight in enu)
+            {
+                Console.WriteLine(wordWeight.Word + ": " + wordWeight.Weight);
+            }
+
+            //Text-Rank
+            Console.WriteLine("TextRank");
+            TextRankExtractor textRankExtractor = new TextRankExtractor();
+            IEnumerable enumerable = textRankExtractor.ExtractTagsWithWeight(total_content,500);
+            string stupid_way = "";
+            foreach (WordWeightPair wordWeightPair in enumerable)
+            {
+                
+                for(int i=0;i<wordWeightPair.Weight*100;i++)
+                {
+                    stupid_way += wordWeightPair.Word+"  ";
+                }
+                Console.WriteLine(wordWeightPair.Word + " " + wordWeightPair.Weight);
+            }
+            SaveFile(stupid_way, "CloudPlot", Directory.GetCurrentDirectory() + @"\", "neal", "forever");
+
      
         }
         //输出分词结果
-        private void DictonarySort(Dictionary<string, int> dic)
+        public void DictonarySort(Dictionary<string, int> dic)
         {
             var dicSort = from objDic in dic orderby objDic.Value descending select objDic;
             foreach (KeyValuePair<string, int> kvp in dicSort)     
@@ -401,6 +471,13 @@ namespace _54160530_Spider
             }
             fileWriter.Flush();
             fileWriter.Close();
+        }
+        //保存所有新闻到html页面
+        public void saveHTML()
+        {
+            string news_html = "<html>" + "\r\n" + html_content + "\r\n" + "</html>";
+            //Console.WriteLine(news_html);
+            SaveFile(news_html, "news_totla_content", Directory.GetCurrentDirectory() + @"\", "neal", "forever");
         }
     }
 }
